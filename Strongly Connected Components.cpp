@@ -13,13 +13,6 @@ using namespace std;
 #define ss               second
 #define si(x)            (int)x.size()
 
-#define prn(x)           cout<<x<<'\n';
-#define prnx(x,y)        cout<<x<<" "<<y<<'\n';
-#define pnr(a)           FOR(a){cout<<ix<<" ";}cout<<'\n';
-#define pnrx(a)          FOR(a){cout<<ix.ff<<" "<<ix.ss<<'\n';}
-#define deb(x)           cout<<#x<<": "<<x<<'\n';
-#define debx(x,y)        cout<<#x<<": "<<x<<" | "<<#y<<": "<<y<<'\n';
-#define debxx(x,y,z)     cout<<#x<<":" <<x<<" | "<<#y<<": "<<y<<" | "<<#z<<": "<<z<<'\n';
 const long long inf = 1e18;
 const long long mod = 1e9 + 7;
 
@@ -27,10 +20,6 @@ int test_case();
 signed main() {
 	ios::sync_with_stdio(0); cin.tie(0);
 	cout << fixed << setprecision(20);
-#ifndef ONLINE_JUDGE
-	freopen("in.txt", "r", stdin);
-	//freopen("out.txt","w",stdout);
-#endif
 
 	int tests = 1;
 	//cin>>tests;

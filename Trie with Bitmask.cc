@@ -1,4 +1,4 @@
-struct trie
+sstruct trie
 {
     struct node {
         node* a[2];

@@ -1,6 +1,3 @@
-#include "bits/stdc++.h"
-using namespace std;
-
 int FIRSTTRUE(function<bool(int)> f, int lb, int rb) {
 	while (lb < rb) {
 		int mb = (lb + rb) / 2;

@@ -1,85 +1,32 @@
-#include "bits/stdc++.h"
-using namespace std;
-#define int              long long
-#define endl             '\n'
-#define pb               push_back
-#define si(x)            (int)((x).size())
-#define all(x)           (x).begin(),(x).end()
-#define FOR(ix,a)        for(auto& ix :a)
-#define rep(i,a,b)       for(int i=a;i<b;i++)
-const int N   = 3e5 + 5;
+// pi[i] = longest prefix string, which is also suffix for string s.subtr(i,len)
 
-string sa , sb;
-vector<int> pi;
 
-int prefix_function() {
-	pi[0] = 0;
-	for (int i = 1 ; i < si(sb) ; i++) {
+vector<int> prefix_function(string &s) 
+{
+	int n = s.size();
+	vector<int> pi(n);
+	for(int i = 1; i < n; i++) 
+	{
 		int j = pi[i - 1];
-		while (j > 0  and sb[i] != sb[j]) j = pi[j - 1];
-		if (sb[i] == sb[j]) j++;
+		while(j > 0 and s[i] != s[j])
+			j = pi[j - 1];
+		if (s[i] == s[j])
+			j++;
 		pi[i] = j;
 	}
-	return 0;
+	return pi;
 }
 
-int chk() {
-	vector<int> ans;
-	int i = 0 , j = 0;
-	while (i < si(sa)) {
-		if (sa[i] == sb[j]) {
-			i++ , j ++;
-		}
-
-		if (j == si(sb)) {
-			ans.pb(i - j + 1);
-			j = pi[j - 1];
-		}
-		else if (i < si(sa)  and sb[j] != sa[i]) {
-			if (j != 0)
-				j = pi[j - 1];
-			else
-				i++;
-		}
+vector<int> find_occurences(string &text, string &pattern)
+{
+	string cur = pattern + '#' + text;
+	int sz1 = text.size(), sz2 = pattern.size();
+	vector<int> v;
+	vector<int> lps = prefix_function(cur);
+	for(int i = sz2 + 1; i <= sz1 + sz2; i++)
+	{
+		if(lps[i] == sz2)
+			v.push_back(i - 2 * sz2);
 	}
-	if (si(ans) == 0) {
-		cout << "NOT FOUND" << endl ;
-	}
-	else {
-		cout << si(ans) << endl;
-		for (auto &i : ans)
-			cout << i << " ";
-		cout << endl ;
-	}
-	return 0;
+	return v;
 }
-
-
-int solve() {
-
-	cin >> sa >> sb;
-
-
-	pi.resize(si(sb));
-	prefix_function();
-	chk();
-	return 0;
-}
-
-signed main() {
-	ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-	cout << fixed << setprecision(20);
-#ifndef ONLINE_JUDGE
-	freopen("in.txt", "r", stdin);
-	//freopen("out.txt","w",stdout);
-#endif
-
-	int tests = 1;
-	cin >> tests;
-	for (int i = 1 ; i <= tests ; i++) {
-		solve();
-	}
-	return 0 ;
-}
-
-
