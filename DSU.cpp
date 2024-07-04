@@ -1,25 +1,27 @@
-struct DSU {
-	int n , components;
-	vector<int> par , sz;
-
-	DSU(int nn) {
-		n = components = nn;
-		par.assign(n + 5 , 0);
-		sz.assign(n + 5 , 1);
-		iota(all(par) , 0);
+struct DSU{
+	int n, components;
+	vector<int> sz, par;
+	
+	DSU(int N){
+		n = components = N;
+		sz = vector<int>(n+1, 0);
+		par = vector<int>(n+1, 0);
+		iota(par.begin(), par.end(), 0);
 	}
-	int root(int x) {
-		if (x == par[x])return x;
-		return par[x] = root(par[x]);
+	
+	int root(int node){
+		if(node == par[node])return node;
+		return par[node] = root(par[node]);
 	}
-	void merge(int x , int y) {
-		x = root(x);
-		y = root(y);
-		if (x == y)return;
-		if (sz[x] < sz[y])swap(x , y);
-		par[y] = x;
-		sz[x] += sz[y];
-		sz[y] = 0;
+	
+	void merge(int node1, int node2){
+		node1 = root(node1);
+		node2 = root(node2);
+		if(node1 == node2)return;
+		if(sz[node1] < sz[node2])swap(node1, node2);
+		par[node2] = node1;
+		sz[node1] += sz[node2];
+		sz[node2] = 0;
 		components--;
 	}
 };
